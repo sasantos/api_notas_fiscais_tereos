@@ -1,9 +1,9 @@
-version: "3.8"
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: api_notas_fiscais
     ports:
       - "3000:3000"
     environment:
@@ -12,5 +12,16 @@ services:
       DB_DATABASE: ${DB_DATABASE}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_PORT: ${DB_PORT}
-    volumes:
-      - .:/usr/src/app
+    networks:  # Corrigido o problema de indentação
+      - web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api_notas_fiscais.rule=Host(`api.agrosasantos.com.br`)"
+      - "traefik.http.routers.api_notas_fiscais.tls=true"
+      - "traefik.http.routers.api_notas_fiscais.entrypoints=websecure"
+      - "traefik.http.routers.api_notas_fiscais.tls.certresolver=lets-encrypt"
+      - "traefik.http.services.api_notas_fiscais.loadbalancer.server.port=3000"
+      - "traefik.docker.network=web"
+networks:
+  web:
+    external: true
