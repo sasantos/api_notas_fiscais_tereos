@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require("cors"); // Importa o middleware CORS
 const { Pool } = require("pg");
 
 const app = express();
@@ -8,6 +9,14 @@ const port = 3000;
 
 // Middleware
 app.use(bodyParser.json());
+
+// Configuração do CORS
+const corsOptions = {
+  origin: "*", // Permite todas as origens (use um domínio específico em produção)
+  methods: ["GET", "POST"], // Métodos permitidos
+  allowedHeaders: ["Content-Type", "Authorization"], // Cabeçalhos permitidos
+};
+app.use(cors(corsOptions)); // Adiciona o middleware de CORS
 
 // PostgreSQL connection
 const pool = new Pool({
