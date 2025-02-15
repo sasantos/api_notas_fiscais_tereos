@@ -14,6 +14,8 @@ services:
       DB_PORT: ${DB_PORT}
     networks:  # Corrigido o problema de indentação
       - web
+    env_file:
+      - .env
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api_notas_fiscais.rule=Host(`api.agrosasantos.com.br`)"
