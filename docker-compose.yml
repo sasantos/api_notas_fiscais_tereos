@@ -16,5 +16,8 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api_notas_fiscais.rule=Host(`api.agrosasantos.com.br`)"
-      - "traefik.http.routers.api_notas_fiscais.entrypoints=web"
+      - "traefik.http.routers.api_notas_fiscais.tls=true"
+      - "traefik.http.routers.api_notas_fiscais.entrypoints=websecure"
+      - "traefik.http.routers.api_notas_fiscais.tls.certresolver=lets-encrypt"
       - "traefik.http.services.api_notas_fiscais.loadbalancer.server.port=3000"
+      - "traefik.docker.network=web"
