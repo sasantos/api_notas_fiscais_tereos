@@ -18,4 +18,4 @@ services:
       - "traefik.http.routers.api_notas_fiscais.entrypoints=web"
       - "traefik.http.services.api_notas_fiscais.loadbalancer.server.port=3000"
     volumes:
-      - .:/usr/src/app
+     # - .:/usr/src/app
