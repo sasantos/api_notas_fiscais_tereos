@@ -1,9 +1,9 @@
-version: "3.8"
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: api_notas_fiscais
     ports:
       - "3000:3000"
     environment:
@@ -12,5 +12,10 @@ services:
       DB_DATABASE: ${DB_DATABASE}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_PORT: ${DB_PORT}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api_notas_fiscais.rule=Host(`api.agrosasantos.com.br`)" # Substitua pelo domínio real
+      - "traefik.http.routers.api_notas_fiscais.entrypoints=web"
+      - "traefik.http.services.api_notas_fiscais.loadbalancer.server.port=3000"
     volumes:
       - .:/usr/src/app
