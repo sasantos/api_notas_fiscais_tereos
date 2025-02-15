@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      DB_USER: ${DB_USER}
+      DB_HOST: ${DB_HOST}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_PORT: ${DB_PORT}
+    volumes:
+      - .:/usr/src/app

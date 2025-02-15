@@ -1,0 +1,19 @@
+{
+  "name": "api_notas_fiscais_tereos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "pg": "^8.13.3"
+  }
+}
