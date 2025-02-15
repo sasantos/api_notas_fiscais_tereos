@@ -18,6 +18,17 @@ const corsOptions = {
 };
 app.use(cors(corsOptions)); // Adiciona o middleware de CORS
 
+// Middleware para verificar a senha
+app.use((req, res, next) => {
+  const clientPassword = req.headers["x-api-password"]; // Cabeçalho personalizado
+  const serverPassword = process.env.API_PASSWORD;
+
+  if (clientPassword !== serverPassword) {
+    return res.status(403).json({ error: "Acesso negado. Senha inválida." });
+  }
+  next();
+});
+
 // PostgreSQL connection
 const pool = new Pool({
   user: process.env.DB_USER,
